@@ -1,7 +1,7 @@
 /* Traffic Lights with a CrossWalk
- *  By Krystle Hewitt
- * When a button is pressed the lights and crosswalk will signal wheather to stop or go.
- */
+    By Krystle Hewitt
+   When a button is pressed the lights and crosswalk will signal wheather to stop or go.
+*/
 #define westButton 3
 #define eastButton 13
 #define westRed 2
@@ -44,7 +44,17 @@ void setup() {
   digitalWrite(eastCrossRed,  HIGH);
   digitalWrite(eastCrossBlue,  LOW);
 }
-
+void blinkYellowLight(int yellowLED , int RedLED)
+{ for ( int i = 0; i < 5; i++ )
+  {
+    digitalWrite(yellowLED, LOW);
+    digitalWrite(RedLED,  LOW);
+    delay(yellowBlinkTime);
+    digitalWrite(yellowLED, HIGH);
+    digitalWrite(RedLED,  HIGH);
+    delay(yellowBlinkTime);
+  }
+}
 void loop() {
 
   if ( digitalRead(westButton) == HIGH ) /* If button is pressed then the lights for TrafficWest will either stay the same or change depending on the previous state.*/
@@ -61,21 +71,15 @@ void loop() {
       digitalWrite(eastRed, HIGH);
       digitalWrite(eastCrossRed,  HIGH);
       delay(changeDelay);
-      for ( int i = 0; i < 5; i++ ) 
-      {
-        digitalWrite(westYellow, LOW);
-        digitalWrite(westCrossRed,  LOW);
-        delay(yellowBlinkTime);
-        digitalWrite(westYellow, HIGH);
-        digitalWrite(westCrossRed,  HIGH);
-        delay(yellowBlinkTime);
-      }
+
+      blinkYellowLight(westYellow ,westCrossRed);
+
       digitalWrite(westYellow, LOW);
       digitalWrite(westRed, LOW);
       digitalWrite(westCrossRed,  LOW);
       digitalWrite(westGreen, HIGH);
       digitalWrite(westCrossBlue,  HIGH);
-      
+
     }
   }
   if ( digitalRead(eastButton) == HIGH )/* If button is pressed then the lights for TrafficWest will either stay the same or change depending on the previous state.*/
@@ -92,15 +96,9 @@ void loop() {
       digitalWrite(westRed, HIGH);
       digitalWrite(westCrossRed,  HIGH);
       delay(changeDelay);
-      for ( int i = 0 ; i < 5 ; i++ )
-      {
-        digitalWrite(eastYellow, LOW);
-        digitalWrite(eastCrossRed,  LOW);
-        delay(yellowBlinkTime);
-        digitalWrite(eastYellow, HIGH);
-        digitalWrite(eastCrossRed,  HIGH);
-        delay(yellowBlinkTime);
-      }
+     
+      blinkYellowLight(eastYellow, eastCrossRed);
+     
       digitalWrite(eastYellow, LOW);
       digitalWrite(eastRed, LOW);
       digitalWrite(eastCrossRed,  LOW);
