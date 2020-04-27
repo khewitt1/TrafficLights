@@ -66,6 +66,15 @@ void greenToYellow(int green, int crossBlue, int yellow)
   delay(changeDelay);
 }
 
+void yellowToRed(int Yellow, int Red, int CrossRed)
+{
+  digitalWrite(Yellow, LOW);
+  digitalWrite(Red, HIGH);
+  digitalWrite(CrossRed,  HIGH);
+  delay(changeDelay);
+}
+
+
 void loop() {
 
   if ( digitalRead(westButton) == HIGH ) /* If button is pressed then the lights for TrafficWest will either stay the same or change depending on the previous state.*/
@@ -77,10 +86,7 @@ void loop() {
 
       greenToYellow(eastGreen, eastCrossBlue, eastYellow);
 
-      digitalWrite(eastYellow, LOW);
-      digitalWrite(eastRed, HIGH);
-      digitalWrite(eastCrossRed,  HIGH);
-      delay(changeDelay);
+      yellowToRed(eastYellow, eastRed, eastCrossRed)
 
       blinkYellowLight(westYellow , westCrossRed);
 
@@ -101,10 +107,7 @@ void loop() {
 
       greenToYellow(westGreen, westCrossBlue, westYellow);
 
-      digitalWrite(westYellow, LOW);
-      digitalWrite(westRed, HIGH);
-      digitalWrite(westCrossRed,  HIGH);
-      delay(changeDelay);
+      yellowToRed( westYellow, westRed, westCrossRed)
 
       blinkYellowLight(eastYellow, eastCrossRed);
 
